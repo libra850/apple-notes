@@ -1,12 +1,27 @@
-import type { Note } from '../types.js';
-import { runAppleScript } from '../utils/applescript.js';
+import type { Note } from '@/types.js';
+import { runAppleScript } from '@/utils/applescript.js';
+
+const formatContent = (content: string) => {
+  if (!content) return '';
+
+  const patterns = [
+    ['\n', /\n/g],
+    ['\t', /\t/g]
+  ] as const;
+
+  return patterns.reduce(
+    (text, [char, pattern]) =>
+      text.includes(char) ? text.replace(pattern, '<br>') : text,
+    content
+  );
+};
 
 export class appleNotesManager {
   createNote(title: string, content: string, tags: string[] = []): Note | null {
     const script = `
       tell application "Notes"
         tell account "iCloud"
-          make new note with properties {name:"${title}", body:"${content}"}
+          make new note with properties {name:"${title}", body:"${formatContent(content)}"}
         end tell
       end tell
     `;

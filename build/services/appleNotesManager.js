@@ -1,10 +1,19 @@
 import { runAppleScript } from '../utils/applescript.js';
+const formatContent = (content) => {
+    if (!content)
+        return '';
+    const patterns = [
+        ['\n', /\n/g],
+        ['\t', /\t/g]
+    ];
+    return patterns.reduce((text, [char, pattern]) => text.includes(char) ? text.replace(pattern, '<br>') : text, content);
+};
 export class appleNotesManager {
     createNote(title, content, tags = []) {
         const script = `
       tell application "Notes"
         tell account "iCloud"
-          make new note with properties {name:"${title}", body:"${content}"}
+          make new note with properties {name:"${title}", body:"${formatContent(content)}"}
         end tell
       end tell
     `;

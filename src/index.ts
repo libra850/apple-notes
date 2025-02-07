@@ -1,7 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-import { appleNotesManager } from "./services/appleNotesManager.js";
+import { appleNotesManager } from "@/services/appleNotesManager.js";
 
 const server = new McpServer({
   name: "apple-notes",

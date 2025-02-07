@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import type { AppleScriptResult } from '../types.js';
+import type { AppleScriptResult } from '@/types.js';
 
 export function runAppleScript(script: string): AppleScriptResult {
   try {
