@@ -33,7 +33,7 @@ export class appleNotesManager {
         const script = `
       tell application "Notes"
         tell account "iCloud"
-          get name of notes where name contains "${query}" or body contains "${query}"
+          get name of notes where name contains "${query}"
         end tell
       end tell
     `;
